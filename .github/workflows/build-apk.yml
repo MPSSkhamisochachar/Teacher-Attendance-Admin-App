@@ -13,11 +13,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Unzip project
-        run: |
-          unzip -o Teacher-Attendance-Admin-app.zip -d extracted
-          echo "Project extracted:"
-          find extracted -maxdepth 3 -type f | head -100
+      - name: name: Unzip project
+  run: |
+    unzip -o Teacher_Attendance_Admin_App.zip -d extracted
+    echo "Project extracted:"
+    find extracted -maxdepth 3 -type f | head -100
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
