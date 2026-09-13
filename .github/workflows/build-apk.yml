@@ -33,20 +33,15 @@ jobs:
           yes | sdkmanager --licenses || true
           sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
-      - name: Find Gradle project
-        run: |
-          find extracted -name "gradlew" -type f -print
-
-      - name: Make gradlew executable
-        run: |
-          chmod +x $(find extracted -name "gradlew" -type f | head -1)
+      - name: Set up Gradle 8.7
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.7"
 
       - name: Build APK
         run: |
-          GRADLEW=$(find extracted -name "gradlew" -type f | head -1)
-          PROJECT_DIR=$(dirname "$GRADLEW")
-          cd "$PROJECT_DIR"
-          ./gradlew assembleDebug --no-daemon
+          cd extracted
+          gradle assembleDebug --no-daemon
 
       - name: Find APK
         run: |
