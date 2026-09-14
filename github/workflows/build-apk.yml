@@ -10,8 +10,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Unzip project
-        run: unzip -o AttendanceAdmin.zip -d extracted
+      - name: Unzip project (auto-detect zip name)
+        run: |
+          ZIPFILE=$(ls *.zip | head -n 1)
+          echo "Found zip: $ZIPFILE"
+          unzip -o "$ZIPFILE" -d extracted
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
